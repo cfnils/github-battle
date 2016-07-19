@@ -1,15 +1,55 @@
+var USER_DATA = {
+	name: 'Ilya Yampolsky',
+	username: 'cfnils',
+	image: 'https://avatars3.githubusercontent.com/u/17437003?v=3&s=460'
+}
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var HelloAssholes = React.createClass ({
+
+var ProfilePic = React.createClass({
+	render: function () {
+		return <img src={this.props.imageUrl} style={{height: 100, width: 100}} />
+	}
+});
+
+
+var ProfileLink = React.createClass ({
 	render: function () {
 		return (
-			<div> Hello Asshole aka {this.props.name}! </div>
+			<div>
+				<a href={'https://github.com/' + this.props.username}>
+					{this.props.username}
+				</a>
+			</div>
 		)
 	}
 });
 
+var ProfileName = React.createClass({
+	render: function () {
+		return (
+			<div>{this.props.name}</div>
+		)
+	}
+});
+
+
+var Avatar = React.createClass({
+	render: function () {
+		return (
+			<div>
+				<ProfilePic imageUrl={this.props.user.image} />
+				<ProfileLink username={this.props.user.username} />
+				<ProfileName name={this.props.user.name} />
+			</div>
+		)
+	}
+
+})
+
 ReactDOM.render(
-	<HelloAssholes name="Ilya" />,
+	<Avatar user={USER_DATA} />,
 	document.getElementById('app')
 );
